@@ -4,13 +4,111 @@
 	<title>Lightbox</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
 	<link rel="stylesheet" href="main.js">
+	<script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+	
 </head>
 <body>
 	<div id="header">
 		<h1>Space rules!</h1>
 	</div>
-	<div id="container">
+<div id="full_div">
+	<div>
+	<script>
+function onImageClick()
+{
+document.getElementById('full_div').innerHTML ='<img src="images/<?php echo $row_some_recordset['photo_name']; ?>"/>';
+}
+</script>
+`	</div>
+</div>
+
+
+	<div id="thumbs"></div>
+		<ul>
+			<li>
+			    <a href="images/arch.jpg" title="Arches" class="lightbox_trigger">Arches</a>
+			</li>
+			<li>    
+			    <a href="images/burst.jpeg" title="Burst" class="lightbox_trigger">Burst</a>
+			</li>
+			<li>    
+			    <a href="images/cloud.jpeg" title="Cloud" class="lightbox_trigger">Cloud</a>
+			</li>    
+			    <a href="images/fake.jpeg" title="fake" class="lightbox_trigger">Fake</a>
+			<li>    
+			    <a href="images/forest.jpeg" title="Forest" class="lightbox_trigger">Forest</a>
+			</li>
+			<li>
+			    <a href="images/launch.jpg" title="Launch" class="lightbox_trigger">Launch</a>
+			</li>
+			<li>
+			    <a href="images/red.jpeg" title="Red" class="lightbox_trigger">Red</a>
+			</li>
+			<li>    
+			    <a href="images/sattelite.jpeg" title="Sattelite" class="lightbox_trigger">Sattelite</a>
+			</li>
+			<li>    
+			    <a href="images/selfie.jpg" title="Selfie" class="lightbox_trigger">Selfie</a>
+			</li>
+			<li>
+			    <a href="images/what.jpeg" title="What" class="lightbox_trigger">What</a>
+			</li>
+		</ul>
+	<script src="https://code.jquery.com/jquery-1.6.2.min.js"></script>
+	<script>
+jQuery(document).ready(function($) {
+	
+	$('.lightbox_trigger').click(function(e) {
 		
-	</div>
+		//prevent default action (hyperlink)
+		e.preventDefault();
+		
+		//Get clicked link href
+		var image_href = $(this).attr("href");
+		
+		/* 	
+		If the lightbox window HTML already exists in document, 
+		change the img src to to match the href of whatever link was clicked
+		
+		If the lightbox window HTML doesn't exists, create it and insert it.
+		(This will only happen the first time around)
+		*/
+		
+		if ($('#lightbox').length > 0) { // #lightbox exists
+			
+			//place href as img src value
+			$('#content').html('<img src="' + image_href + '" />');
+		   	
+			//show lightbox window - you could use .show('fast') for a transition
+			$('#lightbox').show();
+		}
+		
+		else { //#lightbox does not exist - create and insert (runs 1st time only)
+			
+			//create HTML markup for lightbox window
+			var lightbox = 
+			'<div id="lightbox">' +
+				'<p>Click to close</p>' +
+				'<div id="content">' + //insert clicked link's href into img src
+					'<img src="' + image_href +'" />' +
+				'</div>' +	
+			'</div>';
+				
+			//insert lightbox HTML into page
+			$('body').append(lightbox);
+		}
+		
+	});
+	
+	//Click anywhere on the page to get rid of lightbox window
+	$('#lightbox').live('click', function() { //must use live, as the lightbox element is inserted into the DOM
+		$('#lightbox').hide();
+	});
+
+});
+</script>
 </body>
 </html>

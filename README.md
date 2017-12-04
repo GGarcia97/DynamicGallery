@@ -1,1 +1,1 @@
-# DynamicGallery
+# DynamicGallery using lightbox and slider. 8 stock space photos.
